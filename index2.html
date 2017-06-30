@@ -4,7 +4,7 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <title>Travel modes in directions</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style2.css">
   </head>
   <body>
       <div id="floating-panel">
@@ -18,7 +18,7 @@
       </div>
 
       <div id="floating-panel2">
-        <b>Travel Plan: </b>
+        <b>Travel Plan:</b>
           <form>
             <label for="start">Start:</label>
             <input type="text" id="start-address">
@@ -30,10 +30,16 @@
           </form>
       </div>
 
+       <div id="floating-panel3">
+        <b>Travel Summary:</b>
+            <p>Distance: <span id="travel-distance"></span></p>
+            <p>Time: <span id="travel-time"></span></p>
+      </div>
+
       <div id="map"></div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="javascript.js"></script>
+    <script src="javascript2.js"></script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3zxPOYEjaZFkWhGi4WRjUVWXXXF7GRUA&callback=initMap">
     </script>
