@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Point The Way RoadTripper</title>
+    <title> JF Revistions Point The Way RoadTripper </title>
 
     <!-- Boostrap Stylesheet -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" media="screen">
@@ -32,41 +32,55 @@
           <!-- Nav links and other future content no toggling yet-->
           <div class="nav navbar-fixed-top" id="navbar-info">
             <ul class="nav navbar-nav navbar-right navbar-right-custom">
-              <li><a href="contact.html">Contact</a></li>
-              <li><a href="index.html">About</a></li>
+              <li><a href="index.html">HOME</a></li>
+              <li><a href="#">ABOUT</a></li>
+              <li><a href="#">CONTACT</a></li>
             </ul>
           </div><!-- /.navbar-collapse -->
         </div>
       </div><!-- /.container-fluid -->
-    </nav>
-    <!-- End of navbar -->
+    </nav><!-- End of navbar -->
 
     <!-- Start of content wrap -->
     <div class="wrap">
       <div class="container">
-        <section class="row">
-          <div class="col-md-12">
-            <article class="plan-a-trip">
-              <form>
+        <div class="row">
+          <div class="col-md-12 plan-a-trip">
+            
 
-          <span id="starting" class="form-group col-md-6">
-          <label for ="start"><b>Where are you starting your trip?</b></label>
-          <input type="text" class ="form-control" id="startLocation" > 
-          </span>
+              <span id="starting" class="form-group col-md-6">
+                
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">Where are you starting your trip?</span>
+                      
+                    <input type="text" class="form-control" placeholder="Current Location" aria-describedby="basic-addon1">
+                </div>
+              </span>
 
-             <span id="destination" class="form-group col-md-6">
-          <label for ="end"><b>Where would you like to go?</b></label>
-          <input type="text" class ="form-control" id="destLocation" > 
-      
-      </span>
-          <div class="row">
-            <button type="submit" class="btn btn-success center-block" id="add-trip">Submit</button>
-          </div>  
-        </div>
+              
+              <span id="starting" class="form-group col-md-6">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon2">Where would you like to go?</span>
+                    
+                    <input type="text" class="form-control" placeholder="Destination" aria-describedby="basic-addon2">                   
+                </div>
+              </span>
 
 
-    </div>
-    <!-- End of content wrap -->
+            <div classs="row">
+              <div class="col-md-5 col-md-offset-5">
+                <div class="btn-group" role="group" aria-label="...">
+                  
+                  <button type="submit" class="btn btn-default" id="add-trip">Submit</button>
+
+                </div>
+              </div>
+            </div>
+                
+          </div> <!-- End of Col #1 -->
+        </div> <!-- End of Row #1 -->
+      </div><!-- End of Container -->
+    </div><!-- End of content wrap -->
 
     <!-- Start of footer -->
     <footer class="footer">

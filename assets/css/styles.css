@@ -21,16 +21,22 @@ html {
   min-height: 100%;
 }
 
-button {
+#add-trip {
   font-weight: bold;
-  border:1px solid #000;
-  font-family: 'Play', sans-serif;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  color: white;
+  background-color: #90ee90;
+
+}
+
+#basic-addon1, #basic-addon2 {
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
 /* ---------NAV START---------- */
 
 .navbar-trip {
-  background-color: #000;
+  background-color: white;
 }
 
 #logo {
@@ -48,7 +54,7 @@ button {
   color: #fff;
 
   /* Visual */
-  background: #4aaaa5;
+  background: #90ee90;
 }
 
 .navbar-right-custom {
@@ -81,12 +87,16 @@ button {
 .plan-a-trip {
   /* Box-model */
   width: 100%;
-  padding: 30px;
+  padding: 10px;
   /* Positioning */
-  margin-top: 32px;
+  margin: 40px 0;
+  margin-top: 150px;
   /* Visual */
   background-color: #fff;
   font-size: 18px;
+  border-style: outset;
+  border-width: 3px;
+  border-color: #4aaaa5;
 }
 
 .about-me-content > p {
@@ -311,7 +321,7 @@ button {
 
 @media only screen and (max-width: 767px) {
   .navbar-header {
-    background-color: #4aaaa5;
+    background-color: #90ee90;
   }
 
   #logo {
@@ -333,6 +343,74 @@ button {
     text-align: center;
 
     /* Visual */
-    background: #4aaaa5;
+    background: #90ee90;
   }
 }
+
+
+/*PAGE 2 STYLING*/
+
+#Google-Maps-Display {
+  border-style: solid;
+  border-color: purple;
+  border-width: 10px;
+  height: 400px;
+  margin-top: 70px;
+  color: white;
+  text-align: center;
+  font-size: 40px;
+}
+
+#Route-Results {
+  border-style: solid;
+  border-color: purple;
+  border-width: 10px;
+  height: 400px;
+  margin-top: 70px;
+}
+
+#Drive-Results {
+  border-style: solid;
+  border-color: #90ee90;
+  border-width: 10px;
+  height: 100px;
+  margin-top: 30px;
+  color: white;
+  text-align: center;
+  font-size: 40px;
+}
+
+#Public-Trainsit-Results {
+  border-style: solid;
+  border-color: #90ee90;
+  border-width: 10px;
+  height: 100px;
+  margin-top: 30px;
+  color: white;
+  text-align: center;
+  font-size: 40px;
+}
+
+#Public-Trainsit-Directions {
+  border-style: solid;
+  border-color: purple;
+  border-width: 10px;
+  height: 100px;
+  margin-top: 30px;
+  color: white;
+  text-align: center;
+  font-size: 40px;
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
