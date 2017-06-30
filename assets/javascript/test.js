@@ -1,14 +1,16 @@
 //<myGasFeed stuff>
-// var MGF = 'http://devapi.mygasfeed.com/stations/radius/37.7749/-122.4194/5/reg/distance/rfej9napna.json';
+var latitude = 37.7749;
+var longitude = -122.4195;  
+var milesRadius = 5; 
+var MGF = `http://devapi.mygasfeed.com/stations/radius/${latitude}/${longitude}/${milesRadius}/reg/distance/rfej9napna.json`;
 
-// var data = $.ajax({
-//   url: cors + MGF,
-//   method: 'get'
-// }).done((res) => {
-//   console.log(JSON.parse(res))
-//   // console.log(res);
+var data = $.ajax({
+  url: MGF,
+  method: 'get'
+}).done((res) => {
+  console.log(JSON.parse(res))
 
-// })
+})
 
 //<fuelEconomy.gov>
 // Changes XML to JSON
@@ -33,7 +35,7 @@ function xmlToJson(xml) {
 		for(var i = 0; i < xml.childNodes.length; i++) {
 			var item = xml.childNodes.item(i);
 			var nodeName = item.nodeName;
-			if (typeof(obj[nodeName]) == "undefined") {
+			f (typeof(obj[nodeName]) == "undefined") {
 				obj[nodeName] = xmlToJson(item);
 			} else {
 				if (typeof(obj[nodeName].push) == "undefined") {
