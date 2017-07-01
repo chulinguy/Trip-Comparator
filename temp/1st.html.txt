@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+ <html lang="en-us">
+   <head>
+ 
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+ 
+     <title>Point The Way RoadTripper</title>
+ 
+     <!-- Boostrap Stylesheet -->
+     <link rel="stylesheet" href="assets/css/bootstrap.min.css" media="screen">
+     <!-- Local CSS stylesheet -->
+     <link rel="stylesheet" href="assets/css/styles.css" media="screen">
+     <!-- Google fonts stylesheet -->
+     <link href="https://fonts.googleapis.com/css?family=Exo|LobsterTwo|Play|Rokkitt|SourceCodePro|Yellowtail" rel="stylesheet">
+ 
+   </head>
+ 
+   <body>
+     <!-- Start of navbar -->
+     <nav class="navbar navbar-inverse">
+       <div class="container-fluid navbar-trip">
+ 
+         <!-- Brand and toggle get grouped for better mobile display -->
+         <div class="row">
+           <div class="navbar-header">
+             <div class="col-xs-12 phone-nav">
+               <a class="navbar-brand" href="#" id="logo">Point The Way RoadTripper</a>
+             </div>
+           </div>
+           <!-- Nav links and other future content no toggling yet-->
+           <div class="nav navbar-fixed-top" id="navbar-info">
+             <ul class="nav navbar-nav navbar-right navbar-right-custom">
+               <li><a href="contact.html">Contact</a></li>
+               <li><a href="index.html">About</a></li>
+             </ul>
+           </div><!-- /.navbar-collapse -->
+         </div>
+       </div><!-- /.container-fluid -->
+     </nav>
+     <!-- End of navbar -->
+ 
+     <!-- Start of content wrap -->
+     <div class="wrap">
+       <div class="container">
+         <section class="row">
+           <div class="col-md-12">
+             <article class="plan-a-trip">
+               <form>
+ 
+           <span id="starting" class="form-group col-md-6">
+           <label for ="start"><b>Where are you starting your trip?</b></label>
+           <input type="text" class ="form-control" id="startLocation" > 
+           </span>
+ 
+              <span id="destination" class="form-group col-md-6">
+           <label for ="end"><b>Where would you like to go?</b></label>
+           <input type="text" class ="form-control" id="destLocation" > 
+       
+       </span>
+           <div class="row">
+             <button type="submit" class="btn btn-success center-block" id="add-trip">Submit</button>
+           </div>  
+         </div>
+ 
+ 
+     </div>
+     <!-- End of content wrap -->
+ 
+     <!-- Start of footer -->
+     <footer class="footer">
+       <div class="two-toned-footer-color"></div>
+       <p class="text-muted text-muted-footer text-center">
+         &copy; Copyright 2017 Team XUE
+       </p>
+     </footer>
+     <!-- End of footer -->
+ 
+     <!-- jQuery CDN -->
+     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+ 
+     <!-- Bootstrap CDN -->
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+   </body>
+ 
+ </html>

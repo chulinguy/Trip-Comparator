@@ -1,0 +1,106 @@
+body {
+    /* Positioning */
+    margin-bottom: 150px;
+  
+    /* Typography */
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  
+    /* Visual */
+    background: url("../imgs/GGBpic.jpg") no-repeat center center fixed;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+  }
+  
+  html {
+    /* Positioning */
+    position: relative;
+  
+    /* Box-model */
+    min-height: 100%;
+  }
+  
+  button {
+    font-weight: bold;
+    border:1px solid #000;
+    font-family: 'Play', sans-serif;
+  }
+  
+  /* ---------NAV START---------- */
+  
+  .navbar-trip {
+    background-color: #000;
+  }
+  
+  #logo {
+    /* Box-model */
+    height: 70px;
+    padding-top: 20px;
+    padding-bottom: 5px;
+  
+    /* Positioning */
+    margin-left: 50px; 
+    font-family: 'Lobster Two', cursive;
+    /* Typography */
+    font-size: 40px;
+    font-weight: thin;
+    color: #fff;
+  
+    /* Visual */
+    background: #4aaaa5;
+  }
+  
+  .navbar-right-custom {
+    /* Box-model */
+    padding-top: 6px;
+    padding-right: 20px;
+  
+    /* Typography */
+    font-family: Arial;
+    font-weight: lighter;
+  }
+  
+  .navbar-nav  {
+    color: #4aaaa5;
+  }
+  
+  /* --------NAV END---------- */
+  
+  .header {
+    /* Positioning */
+    margin-bottom: 33px;
+    font-family: Georgia, Times, "Times New Roman", serif;
+  
+    /* Typography */
+    font-size: 32px;
+    font-weight: bold;
+    color: #4aaaa5;
+  }
+  
+  .plan-a-trip {
+    /* Box-model */
+    width: 100%;
+    padding: 30px;
+    /* Positioning */
+    margin-top: 32px;
+    /* Visual */
+    background-color: #fff;
+    font-size: 18px;
+  }
+ 
+  
+  .footer {
+    /* Positioning */
+    position: absolute;
+    bottom: 0;
+  
+    /* Box-model */
+    width: 100%;
+    height: 60px;
+    margin-top: 30px;
+  
+    /* Visual */
+    background-color: #666;
+  }
+ 

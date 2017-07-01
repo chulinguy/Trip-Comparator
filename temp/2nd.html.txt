@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Point The Way RoadTripper </title>
-    <!-- 3rd revision to form wrap and require input in text boxes -->
-    <!-- ID naming convention changed to better reflect what it does -->
+    <title> JF Revistions Point The Way RoadTripper </title>
 
     <!-- Boostrap Stylesheet -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" media="screen">
@@ -17,19 +15,13 @@
     <!-- Google fonts stylesheet -->
     <link href="https://fonts.googleapis.com/css?family=Exo|Lobster+Two|Play|Rokkitt|Source+Code+Pro|Yellowtail" rel="stylesheet">
 
-    <!-- Extra Script tag -->
-    <script type="text/javascript">
-      function stopRefresh(e) {
-        e.preventDefault()
-      }
-    </script>
-
   </head>
 
   <body>
     <!-- Start of navbar -->
     <nav class="navbar navbar-inverse">
       <div class="container-fluid navbar-trip">
+
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="row">
           <div class="navbar-header">
@@ -44,38 +36,49 @@
               <li><a href="#">ABOUT</a></li>
               <li><a href="#">CONTACT</a></li>
             </ul>
-          </div> <!-- End of #navbar-info -->
-        </div> <!-- End of Row -->
-      </div> <!-- End of #navbar-trip -->
-    </nav> <!-- End of navbar -->
+          </div><!-- /.navbar-collapse -->
+        </div>
+      </div><!-- /.container-fluid -->
+    </nav><!-- End of navbar -->
 
     <!-- Start of content wrap -->
     <div class="wrap">
       <div class="container">
         <div class="row">
-          <div class="col-xs-12 plan-a-trip">
+          <div class="col-md-12 plan-a-trip">
             
-            <form>
-              
-              <span id="starting" class="form-group col-xs-6">
-              <div class="input-group">
-                <span class="input-group-addon">Where are you starting your trip?</span>
-                <input type="text" class="form-control" placeholder="Current Location" id="startLocation" required>
-                </div>
-              </span>
-               
-              <span id="destination" class="form-group col-xs-6">
-              <div class="input-group">
-                <span class="input-group-addon">Where would you like to go?</span>
-                <input type="text" class="form-control" placeholder="Destination" id="startLocation" required>
-                </div>
-              </span>
-              
-              <a href="index2.html" onclick="stopRefresh(event);"><button id="add-trip" type="submit" class="btn btn-success center-block" >Submit</button></a>
-            </form>
+
+              <span id="starting" class="form-group col-md-6">
                 
-          </div> <!-- End of Col -->
-        </div> <!-- End of Row -->
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">Where are you starting your trip?</span>
+                      
+                    <input type="text" class="form-control" placeholder="Current Location" aria-describedby="basic-addon1">
+                </div>
+              </span>
+
+              
+              <span id="starting" class="form-group col-md-6">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon2">Where would you like to go?</span>
+                    
+                    <input type="text" class="form-control" placeholder="Destination" aria-describedby="basic-addon2">                   
+                </div>
+              </span>
+
+
+            <div classs="row">
+              <div class="col-md-5 col-md-offset-5">
+                <div class="btn-group" role="group" aria-label="...">
+                  
+                  <button type="submit" class="btn btn-default" id="add-trip">Submit</button>
+
+                </div>
+              </div>
+            </div>
+                
+          </div> <!-- End of Col #1 -->
+        </div> <!-- End of Row #1 -->
       </div><!-- End of Container -->
     </div><!-- End of content wrap -->
 

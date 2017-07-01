@@ -15,14 +15,9 @@
     <!-- Local CSS stylesheet -->
     <link rel="stylesheet" href="assets/css/styles.css" media="screen">
     <!-- Google fonts stylesheet -->
-    <link href="https://fonts.googleapis.com/css?family=Exo|Lobster+Two|Play|Rokkitt|Source+Code+Pro|Yellowtail" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Exo|Lobster+Two|Play|Rokkitt|
 
-    <!-- Extra Script tag -->
-    <script type="text/javascript">
-      function stopRefresh(e) {
-        e.preventDefault()
-      }
-    </script>
+Source+Code+Pro|Yellowtail" rel="stylesheet">
 
   </head>
 
@@ -56,22 +51,16 @@
           <div class="col-xs-12 plan-a-trip">
             
             <form>
-              
               <span id="starting" class="form-group col-xs-6">
-              <div class="input-group">
-                <span class="input-group-addon">Where are you starting your trip?</span>
-                <input type="text" class="form-control" placeholder="Current Location" id="startLocation" required>
-                </div>
+                <span class="form-group">Where are you starting your trip?</span>
+                <input type="text" class="form-control" placeholder="Current Location" id="startLocation">
               </span>
-               
+
               <span id="destination" class="form-group col-xs-6">
-              <div class="input-group">
-                <span class="input-group-addon">Where would you like to go?</span>
-                <input type="text" class="form-control" placeholder="Destination" id="startLocation" required>
-                </div>
+                <span class="form-group">Where would you like to go?</span><input type="text" class="form-control" placeholder="Destination" id="startLocation">
               </span>
-              
-              <a href="index2.html" onclick="stopRefresh(event);"><button id="add-trip" type="submit" class="btn btn-success center-block" >Submit</button></a>
+
+              <button id="add-trip" type="submit" class="btn btn-success center-block" >Submit</button> 
             </form>
                 
           </div> <!-- End of Col -->
@@ -89,10 +78,14 @@
     <!-- End of footer -->
 
     <!-- jQuery CDN -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-
+
+2.1.4.min.js"></script>
 
     <!-- Bootstrap CDN -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script 
+
+src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   </body>
 
 </html>
