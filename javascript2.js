@@ -59,6 +59,7 @@ $("#submit").on("click", function(event) {
 
   event.preventDefault(); 
 
+ 
   var startInput = $("#start-address").val().trim(); 
   startInput = startInput.replace(/ /g,"");
   //RegExp or Regular Expression, the / / means blank spaces, the g means on a global scale, and the "" means replace with no space. 
@@ -72,9 +73,21 @@ $("#submit").on("click", function(event) {
   var queryURL = cors + "https://maps.googleapis.com/maps/api/directions/json?origin=" + startInput + "&destination=" + endInput + "&key=AIzaSyA3zxPOYEjaZFkWhGi4WRjUVWXXXF7GRUA"
     console.log(queryURL); 
     // debugger;
+  var queryTransitURL = cors + "https://maps.googleapis.com/maps/api/directions/json?origin=" + startInput + "&destination=" + endInput + "&mode=transit&key=AIzaSyA3zxPOYEjaZFkWhGi4WRjUVWXXXF7GRUA"
 
-  $.ajax({
-          url: queryURL,
+  
+  var val = $("#mode option:selected").text();
+    console.log(val)
+
+
+  debugger
+
+  if (val === "Transit") {
+
+
+
+    $.ajax({
+          url: queryTransitURL,
           method: "GET"       
         })
         .done(function(response) {
@@ -89,16 +102,51 @@ $("#submit").on("click", function(event) {
           initMapAgain(); 
           calculateAndDisplayRoute(directionsService, directionsDisplay);
 
-        var travelDistance = $("#travel-distance").text(response.routes[0].legs[0].distance.text);
-          console.log(travelDistance)
-        var travelTime = $("#travel-time").text(response.routes[0].legs[0].duration.text);
-          console.log(travelTime); 
+     
+        
+        var departureTime = $("#departure-time").text(response.routes[0].legs[0].departure_time.text);
+          console.log(departureTime)
+        var arrivalTime = $("#arrival-time").text(response.routes[0].legs[0].arrival_time.text);
+          console.log(arrivalTime)
+        var transitTime = $("#transit-time").text(response.routes[0].legs[0].duration.text);
+          console.log(transitTime); 
+        var farePrice = $("#fare-price").text(response.routes[0].fare.text);
+          console.log(farePrice); 
+
         });
 
+  }
 
+  else {
+
+
+    $.ajax({
+            url: queryURL,
+            method: "GET"       
+          })
+          .done(function(response) {
+            endCoordLat = response.routes[0].legs[0].end_location.lat;
+              console.log(endCoordLat); 
+            endCoordLng = response.routes[0].legs[0].end_location.lng;
+              console.log(endCoordLng); 
+            startCoordLat = response.routes[0].legs[0].start_location.lat;
+              console.log(startCoordLat); 
+            startCoordLng = response.routes[0].legs[0].start_location.lng;
+              console.log(startCoordLng);  
+            initMapAgain(); 
+            calculateAndDisplayRoute(directionsService, directionsDisplay);
+
+          var travelDistance = $("#travel-distance").text(response.routes[0].legs[0].distance.text);
+            console.log(travelDistance)
+          var travelTime = $("#travel-time").text(response.routes[0].legs[0].duration.text);
+            console.log(travelTime); 
+          });
+  }
 
 
 });
+
+
 
 
 
