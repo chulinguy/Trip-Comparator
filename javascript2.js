@@ -1,12 +1,52 @@
-//default MPG data and car model year before user enters car information
+//initializing default car data and other diriving-related variables before user enters car information
 var MPG = 30;  
 var year = 2016;
 var make = 'Honda';
 var model = 'Accord';
 var closestGasPrice = 0;
 var convertedDistance = 0;
+var carInfo = [];
 
-//google Map variables
+//initializing google Map variables
+var placeSearch, autocomplete;
+var componentForm = {
+  street_number: 'short_name',
+  route: 'long_name',
+  locality: 'long_name',
+  administrative_area_level_1: 'short_name',
+  country: 'long_name',
+  postal_code: 'short_name'
+};
+
+function initAutocomplete() {
+  // Create the autocomplete object, restricting the search to geographical
+  // location types.
+  autocomplete = new google.maps.places.Autocomplete(
+      /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+      {types: ['geocode']});
+  autocomplete = new google.maps.places.Autocomplete(
+      /** @type {!HTMLInputElement} */(document.getElementById('autocomplete-2')),
+      {types: ['geocode']});
+}
+
+// Bias the autocomplete object to the user's geographical location,
+// as supplied by the browser's 'navigator.geolocation' object.
+function geolocate() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var geolocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      var circle = new google.maps.Circle({
+        center: geolocation,
+        radius: position.coords.accuracy
+      });
+      autocomplete.setBounds(circle.getBounds());
+    });
+  }
+}
+
 var endCoordLat = ""; 
 var endCoordLng = ""; 
 var startCoordLat = ""; 
@@ -27,17 +67,17 @@ function initMap() {
               scrollwheel: false,
               zoom: 8
             });
+            initAutocomplete(); 
 };
 
 function initMapAgain() {
-  // var directionsDisplay = new google.maps.DirectionsRenderer;
-  // var directionsService = new google.maps.DirectionsService;
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 14,
     center: {lat: startCoordLat, lng: startCoordLng}
   });
   directionsDisplay.setMap(map);
 
+  initAutocomplete(); 
   calculateAndDisplayRoute(directionsService, directionsDisplay);
   document.getElementById('mode').addEventListener('change', function() {
     calculateAndDisplayRoute(directionsService, directionsDisplay);
@@ -47,8 +87,8 @@ function initMapAgain() {
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
   var selectedMode = document.getElementById('mode').value;
   directionsService.route({
-    origin: {lat: startCoordLat, lng: startCoordLng},  // Haight.
-    destination: {lat: endCoordLat, lng: endCoordLng},  // Ocean Beach.
+    origin: {lat: startCoordLat, lng: startCoordLng},  
+    destination: {lat: endCoordLat, lng: endCoordLng},  
     // Note that Javascript allows us to access the constant
     // using square brackets and a string value as its
     // "property."
@@ -64,13 +104,13 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 
 $("#submit").on("click", function(event) {
   event.preventDefault(); 
-  var startInput = $("#start-address").val().trim(); 
+  var startInput = $(".start-address").val().trim(); 
   startInput = startInput.replace(/ /g,"");
   //RegExp or Regular Expression, the / / means blank spaces, the g means on a global scale, and the "" means replace with no space. 
   //Essentially this takes the string look for all the blank spaces(global) and replace it without a space. 
   //This is not necessary because Google takes the spaces into account when sending queryURL, but this is just a fail safe. 
   console.log(startInput);
-  var endInput = $("#end-address").val().trim();  
+  var endInput = $(".end-address").val().trim();  
   endInput = endInput.replace(/ /g,"");
     console.log(endInput); 
   var cors = "https://cors-anywhere.herokuapp.com/"
@@ -80,9 +120,34 @@ $("#submit").on("click", function(event) {
   var val = $("#mode option:selected").text();
     console.log(val)
 
-  if (val === "Transit") {
-    $.ajax({
-          url: queryTransitURL,
+  $.ajax({
+        url: queryTransitURL,
+        method: "GET"       
+      })
+      .done(function(response) {
+        endCoordLat = response.routes[0].legs[0].end_location.lat;
+          console.log(endCoordLat); 
+        endCoordLng = response.routes[0].legs[0].end_location.lng;
+          console.log(endCoordLng); 
+        startCoordLat = response.routes[0].legs[0].start_location.lat;
+          console.log(startCoordLat); 
+        startCoordLng = response.routes[0].legs[0].start_location.lng;
+          console.log(startCoordLng);  
+        initMapAgain(); 
+        calculateAndDisplayRoute(directionsService, directionsDisplay);
+
+      var departureTime = $("#departure-time").text(response.routes[0].legs[0].departure_time.text);
+        console.log(departureTime)
+      var arrivalTime = $("#arrival-time").text(response.routes[0].legs[0].arrival_time.text);
+        console.log(arrivalTime)
+      var transitTime = $("#transit-time").text(response.routes[0].legs[0].duration.text);
+        console.log(transitTime); 
+      var farePrice = $("#fare-price").text(response.routes[0].fare.text);
+        console.log(farePrice); 
+
+      });
+  $.ajax({
+          url: queryURL,
           method: "GET"       
         })
         .done(function(response) {
@@ -97,55 +162,25 @@ $("#submit").on("click", function(event) {
           initMapAgain(); 
           calculateAndDisplayRoute(directionsService, directionsDisplay);
 
-        var departureTime = $("#departure-time").text(response.routes[0].legs[0].departure_time.text);
-          console.log(departureTime)
-        var arrivalTime = $("#arrival-time").text(response.routes[0].legs[0].arrival_time.text);
-          console.log(arrivalTime)
-        var transitTime = $("#transit-time").text(response.routes[0].legs[0].duration.text);
-          console.log(transitTime); 
-        var farePrice = $("#fare-price").text(response.routes[0].fare.text);
-          console.log(farePrice); 
-
-        });
-
-  }
-  else {
-    $.ajax({
-            url: queryURL,
-            method: "GET"       
+          var travelDistance = $("#travel-distance").text(response.routes[0].legs[0].distance.text);
+            console.log(travelDistance)
+          var travelTime = $("#travel-time").text(response.routes[0].legs[0].duration.text);
+            console.log(travelTime); 
+          //<myGasFeed stuff NEW>
+          var milesRadius = 4; 
+          var MGF = `http://devapi.mygasfeed.com/stations/radius/${startCoordLat}/${startCoordLng}/${milesRadius}/reg/distance/rfej9napna.json`;
+          $.ajax({
+            url: MGF,
+            method: 'get'
+          }).done(function(res) {
+            // console.log(JSON.parse(res))
+            closestGasPrice = JSON.parse(res).stations[0].reg_price;
+            convertedDistance = parseInt(travelDistance[0].innerText.slice(0, -3))
+            console.log('travelDistance', convertedDistance)
+            console.log('closestGasPrice is ', closestGasPrice)
+            console.log(`Estimated fuel cost is ${convertedDistance / MPG * closestGasPrice}`)
           })
-          .done(function(response) {
-            endCoordLat = response.routes[0].legs[0].end_location.lat;
-              console.log(endCoordLat); 
-            endCoordLng = response.routes[0].legs[0].end_location.lng;
-              console.log(endCoordLng); 
-            startCoordLat = response.routes[0].legs[0].start_location.lat;
-              console.log(startCoordLat); 
-            startCoordLng = response.routes[0].legs[0].start_location.lng;
-              console.log(startCoordLng);  
-            initMapAgain(); 
-            calculateAndDisplayRoute(directionsService, directionsDisplay);
-
-            var travelDistance = $("#travel-distance").text(response.routes[0].legs[0].distance.text);
-              console.log(travelDistance)
-            var travelTime = $("#travel-time").text(response.routes[0].legs[0].duration.text);
-              console.log(travelTime); 
-            //<myGasFeed stuff NEW>
-            var milesRadius = 4; 
-            var MGF = `http://devapi.mygasfeed.com/stations/radius/${startCoordLat}/${startCoordLng}/${milesRadius}/reg/distance/rfej9napna.json`;
-            $.ajax({
-              url: MGF,
-              method: 'get'
-            }).done(function(res) {
-              // console.log(JSON.parse(res))
-              closestGasPrice = JSON.parse(res).stations[0].reg_price;
-              convertedDistance = parseInt(travelDistance[0].innerText.slice(0, -3))
-              console.log('travelDistance', convertedDistance)
-              console.log('closestGasPrice is ', closestGasPrice)
-              console.log(`Estimated fuel cost is ${convertedDistance / MPG * closestGasPrice}`)
-            })
-          });
-  }
+  });
 })
 
 $('#car-submit').on('click', function(e) {
@@ -167,7 +202,6 @@ $('#car-submit').on('click', function(e) {
     } else if (xml.nodeType == 3) { // text
       obj = xml.nodeValue;
     }
-
     // do children
     if (xml.hasChildNodes()) {
       for(var i = 0; i < xml.childNodes.length; i++) {
@@ -194,8 +228,7 @@ $('#car-submit').on('click', function(e) {
   if ($('#car-year').val()) {
     year = $('#car-year').val().trim();
   }
-
-  var carInfo = [];  
+  
   $.ajax({
     url: `http://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=${year}&make=${make}&model=${model}`,
     method: 'get'
