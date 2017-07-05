@@ -5,10 +5,10 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <title>Travel modes in directions</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style2.css">
   </head>
   <body>
-      <div id="floating-panel">
+      <!-- <div id="floating-panel">
         <b>Mode of Travel: </b>
           <select id="mode">
             <option value="DRIVING">Driving</option>
@@ -16,10 +16,10 @@
             <option value="BICYCLING">Bicycling</option>
             <option value="TRANSIT">Transit</option>
           </select>
-      </div>
+      </div> -->
 
       <div id="floating-panel2">
-        <b>Travel Plan: </b>
+        <b>Travel Plan:</b>
           <form>
             <label for="start">Start:</label>
             <input type="text" id="start-address">
@@ -27,17 +27,39 @@
             <label for="end">End:</label>
             <input type="text" id="end-address">
             <br>
+              <select id="mode">
+                <option value="DRIVING">Driving</option>
+                <option value="WALKING">Walking</option>
+                <option value="BICYCLING">Bicycling</option>
+                <option value="TRANSIT">Transit</option>
+              </select>
+            <br>
             <button type="submit" id="submit">Let's Go</button>
           </form>
+      </div>
+
+       <div id="floating-panel">
+        <b>Driving Travel Summary:</b>
+            <p>Distance: <span id="travel-distance"></span></p>
+            <p>Time: <span id="travel-time"></span></p>
+      </div>
+
+       <div id="floating-panel3">
+        <b>Transit Travel Summary:</b>
+            <p>Departure Time: <span id="departure-time"></span></p>
+            <p>Arrival Time: <span id="arrival-time"></span></p>
+            <p>Transit Time: <span id="transit-time"></span></p>
+            <p>Fare Price: <span id="fare-price"></span></p>
       </div>
 
       <div id="map"></div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="javascript.js"></script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3zxPOYEjaZFkWhGi4WRjUVWXXXF7GRUA&callback=initMap">
     </script>
+    <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+    <script src="javascript2.js"></script>
   </body>
 </html>
 
