@@ -1,4 +1,12 @@
+//default MPG data and car model year before user enters car information
+var MPG = 30;  
+var year = 2016;
+var make = 'Honda';
+var model = 'Accord';
+var closestGasPrice = 0;
+var convertedDistance = 0;
 
+//google Map variables
 var endCoordLat = ""; 
 var endCoordLng = ""; 
 var startCoordLat = ""; 
@@ -55,10 +63,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 }
 
 $("#submit").on("click", function(event) {
-
   event.preventDefault(); 
-
- 
   var startInput = $("#start-address").val().trim(); 
   startInput = startInput.replace(/ /g,"");
   //RegExp or Regular Expression, the / / means blank spaces, the g means on a global scale, and the "" means replace with no space. 
@@ -71,16 +76,11 @@ $("#submit").on("click", function(event) {
   var cors = "https://cors-anywhere.herokuapp.com/"
   var queryURL = cors + "https://maps.googleapis.com/maps/api/directions/json?origin=" + startInput + "&destination=" + endInput + "&key=AIzaSyA3zxPOYEjaZFkWhGi4WRjUVWXXXF7GRUA"
     console.log(queryURL); 
-    // debugger;
   var queryTransitURL = cors + "https://maps.googleapis.com/maps/api/directions/json?origin=" + startInput + "&destination=" + endInput + "&mode=transit&key=AIzaSyA3zxPOYEjaZFkWhGi4WRjUVWXXXF7GRUA"
-
-  
   var val = $("#mode option:selected").text();
     console.log(val)
 
-
   if (val === "Transit") {
-
     $.ajax({
           url: queryTransitURL,
           method: "GET"       
@@ -97,8 +97,6 @@ $("#submit").on("click", function(event) {
           initMapAgain(); 
           calculateAndDisplayRoute(directionsService, directionsDisplay);
 
-     
-        
         var departureTime = $("#departure-time").text(response.routes[0].legs[0].departure_time.text);
           console.log(departureTime)
         var arrivalTime = $("#arrival-time").text(response.routes[0].legs[0].arrival_time.text);
@@ -111,10 +109,7 @@ $("#submit").on("click", function(event) {
         });
 
   }
-
   else {
-
-
     $.ajax({
             url: queryURL,
             method: "GET"       
@@ -131,13 +126,102 @@ $("#submit").on("click", function(event) {
             initMapAgain(); 
             calculateAndDisplayRoute(directionsService, directionsDisplay);
 
-          var travelDistance = $("#travel-distance").text(response.routes[0].legs[0].distance.text);
-            console.log(travelDistance)
-          var travelTime = $("#travel-time").text(response.routes[0].legs[0].duration.text);
-            console.log(travelTime); 
+            var travelDistance = $("#travel-distance").text(response.routes[0].legs[0].distance.text);
+              console.log(travelDistance)
+            var travelTime = $("#travel-time").text(response.routes[0].legs[0].duration.text);
+              console.log(travelTime); 
+            //<myGasFeed stuff NEW>
+            var milesRadius = 4; 
+            var MGF = `http://devapi.mygasfeed.com/stations/radius/${startCoordLat}/${startCoordLng}/${milesRadius}/reg/distance/rfej9napna.json`;
+            $.ajax({
+              url: MGF,
+              method: 'get'
+            }).done(function(res) {
+              // console.log(JSON.parse(res))
+              closestGasPrice = JSON.parse(res).stations[0].reg_price;
+              convertedDistance = parseInt(travelDistance[0].innerText.slice(0, -3))
+              console.log('travelDistance', convertedDistance)
+              console.log('closestGasPrice is ', closestGasPrice)
+              console.log(`Estimated fuel cost is ${convertedDistance / MPG * closestGasPrice}`)
+            })
           });
   }
-
-
 })
 
+$('#car-submit').on('click', function(e) {
+  e.preventDefault();
+  //<fuelEconomy.gov>
+  // Changes XML to JSON
+  function xmlToJson(xml) {
+    // Create the return object
+    var obj = {};
+    if (xml.nodeType == 1) { // element
+      // do attributes
+      if (xml.attributes.length > 0) {
+      obj["@attributes"] = {};
+        for (var j = 0; j < xml.attributes.length; j++) {
+          var attribute = xml.attributes.item(j);
+          obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
+        }
+      }
+    } else if (xml.nodeType == 3) { // text
+      obj = xml.nodeValue;
+    }
+
+    // do children
+    if (xml.hasChildNodes()) {
+      for(var i = 0; i < xml.childNodes.length; i++) {
+        var item = xml.childNodes.item(i);
+        var nodeName = item.nodeName;
+        if (typeof(obj[nodeName]) == "undefined") {
+          obj[nodeName] = xmlToJson(item);
+        } else {
+          if (typeof(obj[nodeName].push) == "undefined") {
+            var old = obj[nodeName];
+            obj[nodeName] = [];
+            obj[nodeName].push(old);
+          }
+          obj[nodeName].push(xmlToJson(item));
+        }
+      }
+    }
+    return obj;
+  };
+
+  //pull user inputs of car info
+  model = $('#car-model').val().trim();
+  make = $('#car-make').val().trim();
+  if ($('#car-year').val()) {
+    year = $('#car-year').val().trim();
+  }
+
+  var carInfo = [];  
+  $.ajax({
+    url: `http://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=${year}&make=${make}&model=${model}`,
+    method: 'get'
+  }).done(function (res) {
+    var resJSON = xmlToJson(res);
+    console.log(resJSON);
+    var carArr = resJSON.menuItems.menuItem;
+    for (var i = 0; i < carArr.length; i++) {
+      var configID = {};
+      configID[carArr[i].value['#text']] = carArr[i].text['#text'];
+      carInfo.push(configID);
+    }
+    // console.log(carInfo);
+    _.each(carInfo, function (val) {
+      // console.log(Object.keys(val))
+      $.ajax({
+        url:`http://www.fueleconomy.gov/ws/rest/ympg/shared/ympgVehicle/${Object.keys(val)[0]}`,
+        method: 'get'
+      }).done(function(response) {
+        // console.log(response)
+        var dataJSON = xmlToJson(response)
+        // console.log('vehicle info', dataJSON.yourMpgVehicle.avgMpg['#text'])
+        console.log(`Config: ${Object.values(val)} gives ${dataJSON.yourMpgVehicle.avgMpg['#text']} combined MPG`);
+        MPG = dataJSON.yourMpgVehicle.avgMpg['#text'];
+        console.log(`Estimated fuel cost is ${convertedDistance / MPG * closestGasPrice}`);
+      })
+    })
+  })
+})
