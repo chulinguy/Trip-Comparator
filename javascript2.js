@@ -6,8 +6,11 @@ $("#submit").on("click", function(event) {
     console.log(startInput); 
   var endInput = $("#end-address").val().trim();  
     console.log(endInput); 
+  
+  
+  var CAW = 'https://cors-anywhere.herokuapp.com/';
 
-  var queryURL = "https://maps.googleapis.com/maps/api/directions/json?origin=" + startInput + "&destination=" + endInput + "&key=AIzaSyA3zxPOYEjaZFkWhGi4WRjUVWXXXF7GRUA"
+  var queryURL = CAW + "https://maps.googleapis.com/maps/api/directions/json?origin=" + startInput + "&destination=" + endInput + "&key=AIzaSyA3zxPOYEjaZFkWhGi4WRjUVWXXXF7GRUA"
     console.log(queryURL); 
 
 
@@ -16,13 +19,14 @@ $("#submit").on("click", function(event) {
           method: "GET"
         })
         .done(function(response) {
-          var endCoordLat = response.routes.legs.end_location.lat;
+          console.log(response);
+          var endCoordLat = response.routes[0].legs[0].end_location.lat;
             console.log(endCoordLat); 
-          var endCoordLng = response.routes.legs.end_location.lng;
+          var endCoordLng = response.routes[0].legs[0].end_location.lng;
             console.log(endCoordLng); 
-          var startCoordLat = response.routes.legs.start_location.lat;
+          var startCoordLat = response.routes[0].legs[0].start_location.lat;
             console.log(startCoordLat); 
-          var startCoordLng = response.routes.legs.start_location.lng;
+          var startCoordLng = response.routes[0].legs[0].start_location.lng;
             console.log(startCoordLng);  
         });
 });
