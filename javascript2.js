@@ -124,7 +124,7 @@ $("#submit").on("click", function(event) {
     console.log(val)
 
 
-  if (val === "Transit") {
+  // if (val === "Transit") {
 
     $.ajax({
           url: queryTransitURL,
@@ -155,9 +155,9 @@ $("#submit").on("click", function(event) {
 
         });
 
-  }
+  // }
 
-  else {
+  // else {
 
 
     $.ajax({
@@ -181,7 +181,7 @@ $("#submit").on("click", function(event) {
           var travelTime = $("#travel-time").text(response.routes[0].legs[0].duration.text);
             console.log(travelTime); 
           });
-  }
+  // }
 
 
 })
