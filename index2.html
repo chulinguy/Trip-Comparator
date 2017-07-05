@@ -21,10 +21,10 @@
         <b>Travel Plan:</b>
           <form>
             <label for="start">Start:</label>
-            <input type="text" id="start-address">
+            <input id="autocomplete" class="start-address" placeholder="Enter your address" onFocus="geolocate()" type="text"></input>
             <br>
             <label for="end">End:</label>
-            <input type="text" id="end-address">
+            <input id="autocomplete-2" class="end-address" placeholder="Enter your address" onFocus="geolocate()" type="text"></input>
             <br>
               <select id="mode">
                 <option value="DRIVING">Driving</option>
@@ -55,7 +55,7 @@
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3zxPOYEjaZFkWhGi4WRjUVWXXXF7GRUA&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3zxPOYEjaZFkWhGi4WRjUVWXXXF7GRUA&libraries=places&callback=initMap">
     </script>
     <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
     <script src="javascript2.js"></script>

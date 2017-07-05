@@ -1,3 +1,46 @@
+var placeSearch, autocomplete;
+var componentForm = {
+  street_number: 'short_name',
+  route: 'long_name',
+  locality: 'long_name',
+  administrative_area_level_1: 'short_name',
+  country: 'long_name',
+  postal_code: 'short_name'
+};
+
+function initAutocomplete() {
+  // Create the autocomplete object, restricting the search to geographical
+  // location types.
+  autocomplete = new google.maps.places.Autocomplete(
+      /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+      {types: ['geocode']});
+  autocomplete = new google.maps.places.Autocomplete(
+      /** @type {!HTMLInputElement} */(document.getElementById('autocomplete-2')),
+      {types: ['geocode']});
+
+
+}
+
+// Bias the autocomplete object to the user's geographical location,
+// as supplied by the browser's 'navigator.geolocation' object.
+function geolocate() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var geolocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      var circle = new google.maps.Circle({
+        center: geolocation,
+        radius: position.coords.accuracy
+      });
+      autocomplete.setBounds(circle.getBounds());
+    });
+  }
+}
+
+
+
 
 var endCoordLat = ""; 
 var endCoordLng = ""; 
@@ -19,6 +62,7 @@ function initMap() {
               scrollwheel: false,
               zoom: 8
             });
+            initAutocomplete(); 
 };
 
 function initMapAgain() {
@@ -30,6 +74,7 @@ function initMapAgain() {
   });
   directionsDisplay.setMap(map);
 
+  initAutocomplete(); 
   calculateAndDisplayRoute(directionsService, directionsDisplay);
   document.getElementById('mode').addEventListener('change', function() {
     calculateAndDisplayRoute(directionsService, directionsDisplay);
@@ -59,13 +104,13 @@ $("#submit").on("click", function(event) {
   event.preventDefault(); 
 
  
-  var startInput = $("#start-address").val().trim(); 
+  var startInput = $(".start-address").val().trim(); 
   startInput = startInput.replace(/ /g,"");
   //RegExp or Regular Expression, the / / means blank spaces, the g means on a global scale, and the "" means replace with no space. 
   //Essentially this takes the string look for all the blank spaces(global) and replace it without a space. 
   //This is not necessary because Google takes the spaces into account when sending queryURL, but this is just a fail safe. 
   console.log(startInput);
-  var endInput = $("#end-address").val().trim();  
+  var endInput = $(".end-address").val().trim();  
   endInput = endInput.replace(/ /g,"");
     console.log(endInput); 
   var cors = "https://cors-anywhere.herokuapp.com/"
