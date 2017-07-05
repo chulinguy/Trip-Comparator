@@ -35,4 +35,36 @@ html, body {
   font-family: 'Roboto','sans-serif';
   line-height: 30px;
   padding-left: 10px;
+<<<<<<< HEAD
+=======
+}
+
+#floating-panel3 {
+  position: absolute;
+  top: 10px;
+  left: 40%;
+  z-index: 5;
+  background-color: #fff;
+  padding: 5px;
+  border: 1px solid #999;
+  text-align: center;
+  font-family: 'Roboto','sans-serif';
+  line-height: 30px;
+  padding-left: 10px;
+}
+
+
+#floating-panel4 {
+  position: absolute;
+  top: 10px;
+  left: 55%;
+  z-index: 5;
+  background-color: #fff;
+  padding: 5px;
+  border: 1px solid #999;
+  text-align: center;
+  font-family: 'Roboto','sans-serif';
+  line-height: 30px;
+  padding-left: 10px;
+>>>>>>> 16e88a721e78e62227410fddd87d086fe9fe12c8
 }

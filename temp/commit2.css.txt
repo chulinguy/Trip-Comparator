@@ -21,6 +21,12 @@ html {
   min-height: 100%;
 }
 
+button {
+    font-weight: bold;
+    border:1px solid #000;
+    font-family: 'Play', sans-serif;
+  }
+
 #add-trip {
   font-weight: bold;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
@@ -67,7 +73,7 @@ html {
   font-weight: lighter;
 }
 
-.navbar-nav  {
+.navbar-nav {
   color: #4aaaa5;
 }
 
@@ -98,6 +104,9 @@ html {
   border-width: 3px;
   border-color: #4aaaa5;
 }
+
+
+
 .footer {
   /* Positioning */
   position: absolute;
@@ -105,12 +114,13 @@ html {
 
   /* Box-model */
   width: 100%;
-  height: 30px;
+  height: 60px;
   margin-top: 30px;
 
   /* Visual */
-  background-color: #000;
+  background-color: #666;
 }
+
 
 
 /*PAGE 2 STYLING*/
@@ -167,15 +177,3 @@ html {
   font-size: 40px;
 }
 }
-
-
-
-
-
-
-
-
-
-
-
-
