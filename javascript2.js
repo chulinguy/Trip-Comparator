@@ -53,6 +53,7 @@ var startCoordLat = "";
 var startCoordLng = ""; 
 var directionsService;
 var directionsDisplay;
+var directionDisplay2; 
 //we need to establish the directinsService and directionsDisplay as a global variable so that the other functions can read it 
 //we establish this variable at initMap --> redefines the value at a global scale and it will stay 
 //we have to put his two variable in the initMap() function because this is what the Google Map script from the HTML is reading
@@ -61,7 +62,7 @@ function initMap() {
         // Create a map object and specify the DOM element for display.
            directionsService = new google.maps.DirectionsService();
            directionsDisplay = new google.maps.DirectionsRenderer;
-
+           
             var map = new google.maps.Map(document.getElementById('map'), {
               center: {lat: -34.397, lng: 150.644},
               scrollwheel: false,
@@ -71,36 +72,86 @@ function initMap() {
 };
 
 function initMapAgain() {
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 14,
-    center: {lat: startCoordLat, lng: startCoordLng}
+  var location1 = new google.maps.LatLng(startCoordLat, startCoordLng);
+  var location2 = new google.maps.LatLng(endCoordLat, endCoordLng);
+
+  var location3 = new google.maps.LatLng(startCoordLat, startCoordLng);
+  var location4 = new google.maps.LatLng(endCoordLat, endCoordLng);
+
+  var map;
+
+  var mapOptions = { center: new google.maps.LatLng(42.5584308, -70.8597732), zoom: 3,
+  mapTypeId: google.maps.MapTypeId.ROADMAP };
+
+
+  map = new google.maps.Map(document.getElementById("map"), mapOptions);
+  directionsService = new google.maps.DirectionsService();
+  directionsDisplay = new google.maps.DirectionsRenderer({
+    suppressMarkers: false,
+    suppressInfoWindows: true
   });
   directionsDisplay.setMap(map);
 
-  initAutocomplete(); 
-  calculateAndDisplayRoute(directionsService, directionsDisplay);
-  document.getElementById('mode').addEventListener('change', function() {
-    calculateAndDisplayRoute(directionsService, directionsDisplay);
-  });
-};
-
-function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-  var selectedMode = document.getElementById('mode').value;
-  directionsService.route({
-    origin: {lat: startCoordLat, lng: startCoordLng},  
-    destination: {lat: endCoordLat, lng: endCoordLng},  
-    // Note that Javascript allows us to access the constant
-    // using square brackets and a string value as its
-    // "property."
-    travelMode: google.maps.TravelMode[selectedMode]
-  }, function(response, status) {
-    if (status == 'OK') {
+  var request = {
+    origin: location1, 
+    destination: location2,
+    travelMode: google.maps.DirectionsTravelMode.DRIVING
+  };
+  directionsService.route(request, function(response, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
       directionsDisplay.setDirections(response);
-    } else {
-      window.alert('Directions request failed due to ' + status);
+    }
+  });
+
+  directionsDisplay2 = new google.maps.DirectionsRenderer({
+    suppressMarkers: false,
+    suppressInfoWindows: true
+  });
+  directionsDisplay2.setMap(map);
+
+  var request = {
+    origin: location3, 
+    destination: location4,
+    travelMode: google.maps.DirectionsTravelMode.TRANSIT
+  };
+  directionsService.route(request, function(response, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      directionsDisplay2.setDirections(response);
     }
   });
 }
+// google.maps.event.addDomListener(window, 'load', initialize);
+  
+//   var map = new google.maps.Map(document.getElementById('map'), {
+//     zoom: 14,
+//     center: {lat: startCoordLat, lng: startCoordLng}
+//   });
+//   directionsDisplay.setMap(map);
+
+//   initAutocomplete(); 
+//   calculateAndDisplayRoute(directionsService, directionsDisplay);
+//   document.getElementById('mode').addEventListener('change', function() {
+//     calculateAndDisplayRoute(directionsService, directionsDisplay);
+//   });
+// };
+
+// function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+//   var selectedMode = document.getElementById('mode').value;
+//   directionsService.route({
+//     origin: {lat: startCoordLat, lng: startCoordLng},  // Haight.
+//     destination: {lat: endCoordLat, lng: endCoordLng},  // Ocean Beach.
+//     // Note that Javascript allows us to access the constant
+//     // using square brackets and a string value as its
+//     // "property."
+//     travelMode: google.maps.TravelMode[selectedMode]
+//   }, function(response, status) {
+//     if (status == 'OK') {
+//       directionsDisplay.setDirections(response);
+//     } else {
+//       window.alert('Directions request failed due to ' + status);
+//     }
+//   });
+// }
 
 $("#submit").on("click", function(event) {
   event.preventDefault(); 
@@ -119,7 +170,7 @@ $("#submit").on("click", function(event) {
   var queryTransitURL = cors + "https://maps.googleapis.com/maps/api/directions/json?origin=" + startInput + "&destination=" + endInput + "&mode=transit&key=AIzaSyA3zxPOYEjaZFkWhGi4WRjUVWXXXF7GRUA"
   var val = $("#mode option:selected").text();
     console.log(val)
-
+  //Ajax call for transit 
   $.ajax({
         url: queryTransitURL,
         method: "GET"       
@@ -134,7 +185,6 @@ $("#submit").on("click", function(event) {
         startCoordLng = response.routes[0].legs[0].start_location.lng;
           console.log(startCoordLng);  
         initMapAgain(); 
-        calculateAndDisplayRoute(directionsService, directionsDisplay);
 
       var departureTime = $("#departure-time").text(response.routes[0].legs[0].departure_time.text);
         console.log(departureTime)
@@ -146,21 +196,22 @@ $("#submit").on("click", function(event) {
         console.log(farePrice); 
 
       });
-  $.ajax({
-          url: queryURL,
-          method: "GET"       
-        })
-        .done(function(response) {
-          endCoordLat = response.routes[0].legs[0].end_location.lat;
-            console.log(endCoordLat); 
-          endCoordLng = response.routes[0].legs[0].end_location.lng;
-            console.log(endCoordLng); 
-          startCoordLat = response.routes[0].legs[0].start_location.lat;
-            console.log(startCoordLat); 
-          startCoordLng = response.routes[0].legs[0].start_location.lng;
-            console.log(startCoordLng);  
-          initMapAgain(); 
-          calculateAndDisplayRoute(directionsService, directionsDisplay);
+  
+    //Ajax call for driving
+    $.ajax({
+            url: queryURL,
+            method: "GET"       
+          })
+          .done(function(response) {
+            endCoordLat = response.routes[0].legs[0].end_location.lat;
+              console.log(endCoordLat); 
+            endCoordLng = response.routes[0].legs[0].end_location.lng;
+              console.log(endCoordLng); 
+            startCoordLat = response.routes[0].legs[0].start_location.lat;
+              console.log(startCoordLat); 
+            startCoordLng = response.routes[0].legs[0].start_location.lng;
+              console.log(startCoordLng);  
+            initMapAgain(); 
 
           var travelDistance = $("#travel-distance").text(response.routes[0].legs[0].distance.text);
             console.log(travelDistance)

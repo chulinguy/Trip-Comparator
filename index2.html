@@ -7,67 +7,51 @@
     <link rel="stylesheet" type="text/css" href="style2.css">
   </head>
   <body>
-      <!-- <div id="floating-panel">
-        <b>Mode of Travel: </b>
-          <select id="mode">
-            <option value="DRIVING">Driving</option>
-            <option value="WALKING">Walking</option>
-            <option value="BICYCLING">Bicycling</option>
-            <option value="TRANSIT">Transit</option>
-          </select>
-      </div> -->
+    <div id="floating-panel2">
+      <b>Travel Plan:</b>
+        <form>
+          <label for="start">Start:</label>
+          <input id="autocomplete" class="start-address" placeholder="Enter your address" onFocus="geolocate()" type="text"></input>
+          <br>
+          <label for="end">End:</label>
+          <input id="autocomplete-2" class="end-address" placeholder="Enter your address" onFocus="geolocate()" type="text"></input>
+          <br>
+          
+          <button type="submit" id="submit">Let's Go</button>
+        </form>
+    </div>
 
-      <div id="floating-panel2">
-        <b>Travel Plan:</b>
-          <form>
-            <label for="start">Start:</label>
-            <input id="autocomplete" class="start-address" placeholder="Enter your address" onFocus="geolocate()" type="text"></input>
-            <br>
-            <label for="end">End:</label>
-            <input id="autocomplete-2" class="end-address" placeholder="Enter your address" onFocus="geolocate()" type="text"></input>
-            <br>
-              <select id="mode">
-                <option value="DRIVING">Driving</option>
-                <option value="WALKING">Walking</option>
-                <option value="BICYCLING">Bicycling</option>
-                <option value="TRANSIT">Transit</option>
-              </select>
-            <br>
-            <button type="submit" id="submit">Let's Go</button>
-          </form>
-      </div>
+      <div id="floating-panel">
+      <b>Driving Travel Summary:</b>
+          <p>Distance: <span id="travel-distance"></span></p>
+          <p>Time: <span id="travel-time"></span></p>
+          <div id='car-cost-info'></div>
+    </div>
 
-       <div id="floating-panel">
-        <b>Driving Travel Summary:</b>
-            <p>Distance: <span id="travel-distance"></span></p>
-            <p>Time: <span id="travel-time"></span></p>
-            <div id='car-cost-info'></div>
-      </div>
+      <div id="floating-panel3">
+      <b>Transit Travel Summary:</b>
+          <p>Departure Time: <span id="departure-time"></span></p>
+          <p>Arrival Time: <span id="arrival-time"></span></p>
+          <p>Transit Time: <span id="transit-time"></span></p>
+          <p>Fare Price: <span id="fare-price"></span></p>
+    </div>
 
-       <div id="floating-panel3">
-        <b>Transit Travel Summary:</b>
-            <p>Departure Time: <span id="departure-time"></span></p>
-            <p>Arrival Time: <span id="arrival-time"></span></p>
-            <p>Transit Time: <span id="transit-time"></span></p>
-            <p>Fare Price: <span id="fare-price"></span></p>
-      </div>
+    <div id='floating-panel4'>
+      <b>Car Type</b>
+        <form>
+          <label for="start">Enter your car make/brand here</label>
+          <input type="text" id="car-make" required>
+          <br>
+          <label for="start">Enter your car model here</label>
+          <input type="text" id="car-model" required>
+          <br>
+          <label for="start">Enter your car year here</label>
+          <input type="text" id="car-year">
+          <button type="submit" id="car-submit">Enter</button>
+        </form>
+    </div>
 
-      <div id='floating-panel4'>
-        <b>Car Type</b>
-          <form>
-            <label for="start">Enter your car make/brand here</label>
-            <input type="text" id="car-make" required>
-            <br>
-            <label for="start">Enter your car model here</label>
-            <input type="text" id="car-model" required>
-            <br>
-            <label for="start">Enter your car year here</label>
-            <input type="text" id="car-year">
-            <button type="submit" id="car-submit">Enter</button>
-          </form>
-      </div>
-
-      <div id="map"></div>
+    <div id="map"></div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script async defer
