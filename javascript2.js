@@ -103,55 +103,33 @@ function initMapAgain() {
     }
   });
 
+//CHECK YO
   directionsDisplay2 = new google.maps.DirectionsRenderer({
     suppressMarkers: false,
     suppressInfoWindows: true
   });
+  
   directionsDisplay2.setMap(map);
-
-  var request = {
+  
+  directionsDisplay2.setOptions({
+    polylineOptions: {
+      strokeColor: 'green', 
+      strokeWeight: 6, 
+      strokeOpacity: 0.6
+    }
+  });
+ 
+  var request2 = {
     origin: location3, 
     destination: location4,
     travelMode: google.maps.DirectionsTravelMode.TRANSIT
   };
-  directionsService.route(request, function(response, status) {
+  directionsService.route(request2, function(response, status) {
     if (status == google.maps.DirectionsStatus.OK) {
       directionsDisplay2.setDirections(response);
     }
   });
 }
-// google.maps.event.addDomListener(window, 'load', initialize);
-  
-//   var map = new google.maps.Map(document.getElementById('map'), {
-//     zoom: 14,
-//     center: {lat: startCoordLat, lng: startCoordLng}
-//   });
-//   directionsDisplay.setMap(map);
-
-//   initAutocomplete(); 
-//   calculateAndDisplayRoute(directionsService, directionsDisplay);
-//   document.getElementById('mode').addEventListener('change', function() {
-//     calculateAndDisplayRoute(directionsService, directionsDisplay);
-//   });
-// };
-
-// function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-//   var selectedMode = document.getElementById('mode').value;
-//   directionsService.route({
-//     origin: {lat: startCoordLat, lng: startCoordLng},  // Haight.
-//     destination: {lat: endCoordLat, lng: endCoordLng},  // Ocean Beach.
-//     // Note that Javascript allows us to access the constant
-//     // using square brackets and a string value as its
-//     // "property."
-//     travelMode: google.maps.TravelMode[selectedMode]
-//   }, function(response, status) {
-//     if (status == 'OK') {
-//       directionsDisplay.setDirections(response);
-//     } else {
-//       window.alert('Directions request failed due to ' + status);
-//     }
-//   });
-// }
 
 $("#submit").on("click", function(event) {
   event.preventDefault(); 
