@@ -174,11 +174,13 @@ $("#submit").on("click", function(event) {
             method: 'get'
           }).done(function(res) {
             // console.log(JSON.parse(res))
+            //TODO: make it possible to change fuel type
             closestGasPrice = JSON.parse(res).stations[0].reg_price;
             convertedDistance = parseInt(travelDistance[0].innerText.slice(0, -3))
             console.log('travelDistance', convertedDistance)
             console.log('closestGasPrice is ', closestGasPrice)
             console.log(`Estimated fuel cost is ${convertedDistance / MPG * closestGasPrice}`)
+            $('#car-cost-info').append(`<p>Estimated fuel cost is ${convertedDistance / MPG * closestGasPrice}</p>`)
           })
   });
 })
@@ -251,8 +253,8 @@ $('#car-submit').on('click', function(e) {
         // console.log(response)
         var dataJSON = xmlToJson(response)
         // console.log('vehicle info', dataJSON.yourMpgVehicle.avgMpg['#text'])
-        console.log(`Config: ${Object.values(val)} gives ${dataJSON.yourMpgVehicle.avgMpg['#text']} combined MPG`);
         MPG = dataJSON.yourMpgVehicle.avgMpg['#text'];
+        console.log(`Config: ${Object.values(val)}'s calculated fuel cost `);
         console.log(`Estimated fuel cost is ${convertedDistance / MPG * closestGasPrice}`);
       })
     })
