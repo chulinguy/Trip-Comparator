@@ -6,40 +6,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Point The Way RoadTripper </title>
+    <title>RouteMe</title>
     <!-- 3rd revision to form wrap and require input in text boxes -->
     <!-- ID naming convention changed to better reflect what it does -->
 
     <!-- Boostrap Stylesheet -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" media="screen">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- Local CSS stylesheet -->
     <link rel="stylesheet" href="assets/css/styles.css" media="screen">
     <!-- Google fonts stylesheet -->
     <link href="https://fonts.googleapis.com/css?family=Exo|Lobster+Two|Play|Rokkitt|Source+Code+Pro|Yellowtail" rel="stylesheet">
-
-    <!-- Extra Script tag -->
-    <script type="text/javascript">
-      function stopRefresh(e) {
-        e.preventDefault()
-      }
-    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="assets/javascript/test.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   </head>
 
   <body>
     <!-- Start of navbar -->
-    <nav class="navbar navbar-fixed-top navbar-inverse">
+    <nav class="navbar navbar-fixed-top navbar-default">
       <div class="container-fluid navbar-trip">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="row">
           <div class="navbar-header">
-            <div class="col-xs-12 phone-nav">
-              <a class="navbar-brand" href="#" id="logo">Point The Way RoadTripper</a>
+            <div class="col-lg-12 phone-nav page-logo">
+              <a class="navbar-brand" href="index.html" id="banner">RouteMe</a>
+              <img id="logo" src="assets/imgs/logo.png" alt="logo"> 
             </div>
           </div>
           <!-- Nav links and other future content no toggling yet-->
-          <div class="nav navbar-fixed-top" id="navbar-info">
+          <div>
             <ul class="nav navbar-nav navbar-right navbar-right-custom">
+              <li><a href="index.html">HOME</a></li>
+              <li><a href="#">ABOUT</a></li>
+              <li><a href="#">CONTACT</a></li>
+            </ul>
+          </div> 
+
+          <div class="dropdown dd-menu">
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+            <span class="glyphicon glyphicon-list"></span></button>
+            <ul class="dropdown-menu">
               <li><a href="index.html">HOME</a></li>
               <li><a href="#">ABOUT</a></li>
               <li><a href="#">CONTACT</a></li>
@@ -49,29 +56,30 @@
       </div> <!-- End of #navbar-trip -->
     </nav> <!-- End of navbar -->
 
+
     <!-- Start of content wrap -->
     <div class="wrap">
       <div class="container">
         <div class="row">
-          <div class="col-xs-12 plan-a-trip">
+          <div class="col-lg-12 plan-a-trip">
             
             <form>
               
-              <span id="starting" class="form-group col-xs-6">
+              <span id="starting" class="form-group col-lg-6">
               <div class="input-group">
-                <span class="input-group-addon">Where are you starting your trip?</span>
-                <input type="text" class="form-control" placeholder="Current Location" id="startLocation" required>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-map-marker"></span>Where are you starting your trip?</span>
+                <input type="text" class="form-control" placeholder="Starting Location" id="startLocation" required>
                 </div>
               </span>
                
-              <span id="destination" class="form-group col-xs-6">
+              <span id="destination" class="form-group col-lg-6">
               <div class="input-group">
-                <span class="input-group-addon">Where would you like to go?</span>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-map-marker"></span>Where would you like to go?</span>
                 <input type="text" class="form-control" placeholder="Destination" id="startLocation" required>
                 </div>
               </span>
               
-              <a href="directions.html" onclick="stopRefresh(event);"><button id="add-trip" type="submit" class="btn btn-success center-block" >Submit</button></a>
+              <a href="directions.html" onclick="stopRefresh(event);"><button id="add-trip" type="submit" class="btn btn-success center-block" >Search</button></a>
             </form>
                 
           </div> <!-- End of Col -->
@@ -88,11 +96,7 @@
     </footer>
     <!-- End of footer -->
 
-    <!-- jQuery CDN -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-
-    <!-- Bootstrap CDN -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  
   </body>
 
 </html>

@@ -1,13 +1,13 @@
 //initializing default car data and other diriving-related variables before user enters car information
-var MPG = 30;  
-var year = 2016;
-var make = 'Honda';
-var model = 'Accord';
-var closestGasPrice = 0;
-var convertedDistance = 0;
-var carInfo = [];
-
-//initializing google Map variables
+ var MPG = 30;  
+ var year = 2016;
+ var make = 'Honda';
+ var model = 'Accord';
+ var closestGasPrice = 0;
+ var convertedDistance = 0;
+ var carInfo = [];
+ 
+ //initializing google Map variables
 var placeSearch, autocomplete;
 var componentForm = {
   street_number: 'short_name',
@@ -17,6 +17,13 @@ var componentForm = {
   country: 'long_name',
   postal_code: 'short_name'
 };
+var endCoordLat = ""; 
+var endCoordLng = ""; 
+var startCoordLat = ""; 
+var startCoordLng = ""; 
+var directionsService;
+var directionsDisplay;
+var directionDisplay2; 
 
 function initAutocomplete() {
   // Create the autocomplete object, restricting the search to geographical
@@ -47,13 +54,6 @@ function geolocate() {
   }
 }
 
-var endCoordLat = ""; 
-var endCoordLng = ""; 
-var startCoordLat = ""; 
-var startCoordLng = ""; 
-var directionsService;
-var directionsDisplay;
-var directionDisplay2; 
 //we need to establish the directinsService and directionsDisplay as a global variable so that the other functions can read it 
 //we establish this variable at initMap --> redefines the value at a global scale and it will stay 
 //we have to put his two variable in the initMap() function because this is what the Google Map script from the HTML is reading
@@ -103,11 +103,11 @@ function initMapAgain() {
     }
   });
 
-//CHECK YO
   directionsDisplay2 = new google.maps.DirectionsRenderer({
     suppressMarkers: false,
     suppressInfoWindows: true
   });
+
   
   directionsDisplay2.setMap(map);
   
@@ -124,7 +124,9 @@ function initMapAgain() {
     destination: location4,
     travelMode: google.maps.DirectionsTravelMode.TRANSIT
   };
+
   directionsService.route(request2, function(response, status) {
+
     if (status == google.maps.DirectionsStatus.OK) {
       directionsDisplay2.setDirections(response);
     }
@@ -132,7 +134,9 @@ function initMapAgain() {
 }
 
 $("#submit").on("click", function(event) {
+
   event.preventDefault(); 
+ 
   var startInput = $(".start-address").val().trim(); 
   startInput = startInput.replace(/ /g,"");
   //RegExp or Regular Expression, the / / means blank spaces, the g means on a global scale, and the "" means replace with no space. 
@@ -146,6 +150,7 @@ $("#submit").on("click", function(event) {
   var queryURL = cors + "https://maps.googleapis.com/maps/api/directions/json?origin=" + startInput + "&destination=" + endInput + "&key=AIzaSyA3zxPOYEjaZFkWhGi4WRjUVWXXXF7GRUA"
     console.log(queryURL); 
   var queryTransitURL = cors + "https://maps.googleapis.com/maps/api/directions/json?origin=" + startInput + "&destination=" + endInput + "&mode=transit&key=AIzaSyA3zxPOYEjaZFkWhGi4WRjUVWXXXF7GRUA"
+  
   var val = $("#mode option:selected").text();
     console.log(val)
   //Ajax call for transit 
@@ -175,26 +180,27 @@ $("#submit").on("click", function(event) {
 
       });
   
-    //Ajax call for driving
-    $.ajax({
-            url: queryURL,
-            method: "GET"       
-          })
-          .done(function(response) {
-            endCoordLat = response.routes[0].legs[0].end_location.lat;
-              console.log(endCoordLat); 
-            endCoordLng = response.routes[0].legs[0].end_location.lng;
-              console.log(endCoordLng); 
-            startCoordLat = response.routes[0].legs[0].start_location.lat;
-              console.log(startCoordLat); 
-            startCoordLng = response.routes[0].legs[0].start_location.lng;
-              console.log(startCoordLng);  
-            initMapAgain(); 
+  //Ajax call for driving
+  $.ajax({
+          url: queryURL,
+          method: "GET"       
+        })
+        .done(function(response) {
+          endCoordLat = response.routes[0].legs[0].end_location.lat;
+            console.log(endCoordLat); 
+          endCoordLng = response.routes[0].legs[0].end_location.lng;
+            console.log(endCoordLng); 
+          startCoordLat = response.routes[0].legs[0].start_location.lat;
+            console.log(startCoordLat); 
+          startCoordLng = response.routes[0].legs[0].start_location.lng;
+            console.log(startCoordLng);  
+          initMapAgain(); 
 
           var travelDistance = $("#travel-distance").text(response.routes[0].legs[0].distance.text);
             console.log(travelDistance)
           var travelTime = $("#travel-time").text(response.routes[0].legs[0].duration.text);
             console.log(travelTime); 
+
           //<myGasFeed stuff NEW>
           var milesRadius = 4; 
           var MGF = `http://devapi.mygasfeed.com/stations/radius/${startCoordLat}/${startCoordLng}/${milesRadius}/reg/distance/rfej9napna.json`;
@@ -213,11 +219,11 @@ $("#submit").on("click", function(event) {
           })
   });
 })
-
+        
 $('#car-submit').on('click', function(e) {
   e.preventDefault();
-  //<fuelEconomy.gov>
-  // Changes XML to JSON
+
+   // Changes XML to JSON
   function xmlToJson(xml) {
     // Create the return object
     var obj = {};
@@ -252,7 +258,6 @@ $('#car-submit').on('click', function(e) {
     }
     return obj;
   };
-
   //pull user inputs of car info
   model = $('#car-model').val().trim();
   make = $('#car-make').val().trim();
@@ -289,3 +294,4 @@ $('#car-submit').on('click', function(e) {
     })
   })
 })
+
