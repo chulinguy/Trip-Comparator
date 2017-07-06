@@ -1,3 +1,43 @@
+//intialize firebase 
+var config = {
+    apiKey: "AIzaSyBs5VWANjIMo9AgUNbzt4PL_HsMBkLu2zA",
+    authDomain: "ucb-bootcamp-project-1.firebaseapp.com",
+    databaseURL: "https://ucb-bootcamp-project-1.firebaseio.com",
+    projectId: "ucb-bootcamp-project-1",
+    storageBucket: "ucb-bootcamp-project-1.appspot.com",
+    messagingSenderId: "1078386210813"
+  };
+firebase.initializeApp(config);
+
+// Create a variable to reference the database
+var database = firebase.database();
+
+// Use the below variable clickCounter to keep track of the clicks
+var clickCounter = 0; 
+
+// At the initial load and on subsequent data value changes, get a snapshot of the current data. (I.E FIREBASE HERE)
+// This callback keeps the page updated when a value changes in firebase.
+database.ref().on("value", function(snapshot) {
+  // We are now inside our .on function...
+
+  // Console.log the "snapshot" value (a point-in-time representation of the database)
+  console.log(snapshot.val());
+  // This "snapshot" allows the page to get the most current values in firebase.
+
+  // Change the value of our clickCounter to match the value in the database
+  clickCounter = snapshot.val().clickCount;
+
+  // Console Log the value of the clickCounter
+  console.log(clickCounter);
+
+// If any errors are experienced, log them to console.
+}, function(errorObject) {
+  console.log("The read failed: " + errorObject.code);
+});
+
+
+
+
 //initializing default car data and other diriving-related variables before user enters car information
  var MPG = 30;  
  var year = 2016;
@@ -64,7 +104,7 @@ function initMap() {
            directionsDisplay = new google.maps.DirectionsRenderer;
            
             var map = new google.maps.Map(document.getElementById('map'), {
-              center: {lat: -34.397, lng: 150.644},
+              center: {lat: 37.7749, lng: -122.4194},
               scrollwheel: false,
               zoom: 8
             });
@@ -80,7 +120,7 @@ function initMapAgain() {
 
   var map;
 
-  var mapOptions = { center: new google.maps.LatLng(42.5584308, -70.8597732), zoom: 3,
+  var mapOptions = { center: new google.maps.LatLng(37.7749, -122.4194), zoom: 3,
   mapTypeId: google.maps.MapTypeId.ROADMAP };
 
 
@@ -136,12 +176,21 @@ function initMapAgain() {
 $("#submit").on("click", function(event) {
 
   event.preventDefault(); 
+
+  //Update click counter when user submits a trip itinerary 
+  clickCounter ++ ; 
+
+  //Update new website visitor count and save to firebase 
+  //We use .set instead of .push because we wanted to replace instead of add to the old clickCount
+  database.ref().set({
+    clickCount: clickCounter
+  });
  
   var startInput = $(".start-address").val().trim(); 
-  startInput = startInput.replace(/ /g,"");
   //RegExp or Regular Expression, the / / means blank spaces, the g means on a global scale, and the "" means replace with no space. 
   //Essentially this takes the string look for all the blank spaces(global) and replace it without a space. 
   //This is not necessary because Google takes the spaces into account when sending queryURL, but this is just a fail safe. 
+  startInput = startInput.replace(/ /g,"");
   console.log(startInput);
   var endInput = $(".end-address").val().trim();  
   endInput = endInput.replace(/ /g,"");
@@ -151,8 +200,7 @@ $("#submit").on("click", function(event) {
     console.log(queryURL); 
   var queryTransitURL = cors + "https://maps.googleapis.com/maps/api/directions/json?origin=" + startInput + "&destination=" + endInput + "&mode=transit&key=AIzaSyA3zxPOYEjaZFkWhGi4WRjUVWXXXF7GRUA"
   
-  var val = $("#mode option:selected").text();
-    console.log(val)
+  
   //Ajax call for transit 
   $.ajax({
         url: queryTransitURL,
@@ -220,8 +268,8 @@ $("#submit").on("click", function(event) {
   });
 })
         
-$('#car-submit').on('click', function(e) {
-  e.preventDefault();
+$('#car-submit').on('click', function(event) {
+  event.preventDefault();
 
    // Changes XML to JSON
   function xmlToJson(xml) {

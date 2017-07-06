@@ -12,6 +12,17 @@ body {
 
 }
 
+
+.about {
+  width: 100%;
+  padding: 20px;
+  /* Positioning */
+  margin-top: 25%;
+  margin-bottom: 15%;
+  /* Visual */
+  background: rgba(255, 255, 255, 0.8); 
+}
+
 #b1 {
 
   background: url("../imgs/sf.jpg") no-repeat center center fixed;
