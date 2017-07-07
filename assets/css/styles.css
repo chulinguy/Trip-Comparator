@@ -83,6 +83,10 @@ p, label {
   margin-top: 80px;
 }
 
+#car-form {
+  font-size: 12px;  
+}
+
 #map {
   height: 500px;
 }
@@ -167,6 +171,14 @@ p, label {
    margin-bottom: 15%;
    /* Visual */
    background: rgba(255, 255, 255, 0.8); 
+ }
+
+ #drive-results, #public-transit-results {
+   border: 1px solid red;
+   border-radius: 4px;
+   padding: 4px;
+   margin: 2px;
+
  }
 
 #page-1 {
