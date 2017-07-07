@@ -227,9 +227,9 @@ $("#submit").on("click", function(event) {
                   setTimeout(ajaxCall, 1000);
                 })
             }
-
+            var cors = "https://cors-anywhere.herokuapp.com/"
             var milesRadius = 5; 
-            var MGF = `http://devapi.mygasfeed.com/stations/radius/${startCoordLat}/${startCoordLng}/${milesRadius}/reg/distance/rfej9napna.json`;
+            var MGF = `${cors}http://devapi.mygasfeed.com/stations/radius/${startCoordLat}/${startCoordLng}/${milesRadius}/reg/distance/rfej9napna.json`;
             ajaxCall();
     });
   }
@@ -280,9 +280,9 @@ $('#add-car').on('click', function(e) {
     year = $('#car-year').val().trim();
   }
   $('#fuel-cost').html('');
-  
+  var cors = "https://cors-anywhere.herokuapp.com/"
   $.ajax({
-    url: `http://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=${year}&make=${make}&model=${model}`,
+    url: `${cors}http://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=${year}&make=${make}&model=${model}`,
     method: 'get'
   }).done(function (res) {
     var resJSON = xmlToJson(res);
@@ -298,7 +298,7 @@ $('#add-car').on('click', function(e) {
     _.each(carInfo, function (val) {
       // console.log(Object.keys(val))
       $.ajax({
-        url:`http://www.fueleconomy.gov/ws/rest/ympg/shared/ympgVehicle/${Object.keys(val)[0]}`,
+        url:`${cors}http://www.fueleconomy.gov/ws/rest/ympg/shared/ympgVehicle/${Object.keys(val)[0]}`,
         method: 'get'
       }).done(function(response) {
         // console.log(response)
