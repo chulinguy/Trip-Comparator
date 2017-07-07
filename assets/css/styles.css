@@ -1,4 +1,3 @@
-
 body {
   font-family: Arial, Helvetica, sans-serif;
  
@@ -7,6 +6,8 @@ body {
         -moz-background-size: cover;
         -o-background-size: cover;
         background-size: cover;
+
+  overflow: auto;
 }
 
 p, label {
@@ -20,6 +21,8 @@ p, label {
 
 .container {
   overflow: hidden;
+  margin-top: 1%;
+  margin-bottom: 2%;
 }
 
 .input-group {
@@ -81,10 +84,8 @@ p, label {
 
 .col-xs-5, .col-xs-7 {
   margin-top: 80px;
-}
-
-#car-form {
-  font-size: 12px;  
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 #map {
@@ -147,20 +148,56 @@ p, label {
   padding-top: 10px; 
   padding-bottom: 20px;
   padding-right: 5px;
- /* background: #90ee90;*/
 }
 
-#car-specs {
-  margin-top: 10px;
+#drive-results,
+#public-transit-results {
+  border-style: solid;
+  border-radius: 10px;
+  border-color: #000;
+  border-width: 1px;
+  /*width: 90%;*/
+  margin-top: 2%;
+  /*margin-left: 2%;*/
+  padding-left: 2px;
+  color: #000;
+  font-size: 14px;
+}
+
+#public-transit-results {
+  margin-bottom: 3%;
+  background-color: #33ff33;
+}
+
+#drive-results {
+  background-color: #66a3ff; 
 }
 
 #car-specs, #route-results {
-  background-color: #e6e6ff;
+  overflow: auto;
+  background-color: #f0f5f5;
   opacity: 0.98; 
-  border-radius: 8px;
-  border-style: ridge;
+  border-radius: 7px;
+  border-style: solid;
   border-color: #000;
   border-width: 1px;
+}
+
+#car-specs {
+  margin-top: 1%;
+  margin-bottom: 2%;
+}
+
+/*-----Submit button for specific car mileage------*/
+#add-car {
+  border-style: solid;
+  border-color: #000;
+  border-width: 1px;
+  margin-bottom: 2%;
+  color: #000;
+  text-align: center;
+  font-family: 'Play', sans-serif;
+  font-size: 12px;
 }
 
 #about {
@@ -171,14 +208,6 @@ p, label {
    margin-bottom: 15%;
    /* Visual */
    background: rgba(255, 255, 255, 0.8); 
- }
-
- #drive-results, #public-transit-results {
-   border: 1px solid red;
-   border-radius: 4px;
-   padding: 4px;
-   margin: 2px;
-
  }
 
 #page-1 {
@@ -212,19 +241,3 @@ p, label {
   }
   
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

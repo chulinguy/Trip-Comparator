@@ -17,7 +17,7 @@
 <link href="https://fonts.googleapis.com/css?family=Exo|Lobster+Two|Play|Rokkitt|Source+Code+Pro|Yellowtail" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!--slide show script-->
-<script src="assets/javascript/slideShow.js"></script>
+<script src="assets/javascript/test.js"></script>
 
 </head>
 
@@ -67,7 +67,7 @@
               <span id="starting" class="form-group col-lg-6">
               <div class="input-group">
                 <span class="input-group-addon"><span class="glyphicon glyphicon-map-marker"></span>Where are you starting your trip?</span>
-                <input id="autocomplete" class="start-address form-control" placeholder="Start Address" onFocus="geolocate()" type="text"  required></input>
+                <input id="autocomplete" class="start-address form-control" placeholder="Start Address" onFocus="geolocate()" type="text" required></input>
                 </div>
               </span>
               
@@ -129,14 +129,14 @@
       <div class="col-xs-5" id="route-results">
         <h4>Route results for your trip</h4>
         
-        <div id="drive-results">
+        <div id="drive-results" class="center-block">
           <b>Driving Travel Summary:</b>
           <p>Distance: <span id="travel-distance"></span></p>
           <p>Time: <span id="travel-time"></span></p>
           <p>Fuel cost: <span id='fuel-cost'></span></p>
         </div>
 
-        <div id="public-transit-results">	
+        <div id="public-transit-results" id="center-block">	
           <b>Transit Travel Summary:</b>
           <p>Departure Time: <span id="departure-time"></span></p>
           <p>Arrival Time: <span id="arrival-time"></span></p>
@@ -163,7 +163,7 @@
             <input id="car-year" type="text" class="form-control" placeholder="Year">
           </div>
 
-           <button type="submit" class="btn btn-warning center-block" id="add-car">Add Car</button>
+           <button type="submit" class="btn btn-sm btn-warning center-block" id="add-car">Add Car</button>
            </form>
       </div> <!-- End Car specs -->
     </div> <!-- End Bootstrap Container -->
