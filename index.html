@@ -12,18 +12,18 @@
     <!-- ID naming convention changed to better reflect what it does -->
 
     <!-- Boostrap Stylesheet -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" media="screen">
+      <link rel="stylesheet" href="assets/css/bootstrap.min.css" media="screen">
     <!-- Local CSS stylesheet -->
-    <link rel="stylesheet" href="assets/css/styles.css" media="screen">
+      <link rel="stylesheet" href="assets/css/styles.css" media="screen">
     <!-- Google fonts stylesheet -->
-    <link href="https://fonts.googleapis.com/css?family=Exo|Lobster+Two|Play|Rokkitt|Source+Code+Pro|Yellowtail" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css?family=Exo|Lobster+Two|Play|Rokkitt|Source+Code+Pro|Yellowtail" rel="stylesheet">
 
-    <!-- Extra Script tag -->
-    <script type="text/javascript">
+    <!-- Extra Script tag & Prevent Default-->
+      <script type="text/javascript">
       function stopRefresh(e) {
         e.preventDefault()
       }
-    </script>
+      </script>
 
   </head>
 
@@ -38,6 +38,7 @@
               <a class="navbar-brand" href="#" id="logo">Point The Way RoadTripper</a>
             </div>
           </div>
+          
           <!-- Nav links and other future content no toggling yet-->
           <div class="nav navbar-fixed-top" id="navbar-info">
             <ul class="nav navbar-nav navbar-right navbar-right-custom">
@@ -73,6 +74,7 @@
               </span>
               
               <a href="directions.html" onclick="stopRefresh(event);"><button id="add-trip" type="submit" class="btn btn-success center-block" >Submit</button></a>
+            
             </form>
                 
           </div> <!-- End of Col -->
@@ -80,14 +82,14 @@
       </div><!-- End of Container -->
     </div><!-- End of Content Wrap -->
 
-    <!-- Start of footer -->
+    <!-- Start of Footer -->
     <footer class="footer">
       <div class="two-toned-footer-color"></div>
       <p class="text-muted text-muted-footer text-center">
         &copy; Copyright 2017 Team XUE
       </p>
     </footer>
-    <!-- End of footer -->
+    <!-- End of Footer -->
 
     <!-- jQuery CDN -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
