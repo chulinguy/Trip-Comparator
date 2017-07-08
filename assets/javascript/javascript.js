@@ -208,6 +208,7 @@ $("#submit").on("click", function(event) {
             //<myGasFeed stuff NEW>
 
             var ajaxCBFunc = function (res){
+              console.log(res)
               closestGasPrice = JSON.parse(res).stations[0].reg_price;
               convertedDistance = parseInt(travelDistance[0].innerText.slice(0, -3))
               console.log('travelDistance', convertedDistance)
@@ -227,9 +228,9 @@ $("#submit").on("click", function(event) {
                   setTimeout(ajaxCall, 1000);
                 })
             }
-            var cors = "https://cors-anywhere.herokuapp.com/"
+            // var cors = "https://cors-anywhere.herokuapp.com/"
             var milesRadius = 5; 
-            var MGF = `${cors}http://devapi.mygasfeed.com/stations/radius/${startCoordLat}/${startCoordLng}/${milesRadius}/reg/distance/rfej9napna.json`;
+            var MGF = `http://devapi.mygasfeed.com/stations/radius/${startCoordLat}/${startCoordLng}/${milesRadius}/reg/distance/rfej9napna.json`;
             ajaxCall();
     });
   }
